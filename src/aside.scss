@@ -1,0 +1,141 @@
+aside {
+  min-width: 557px;
+  margin-right: 8px;
+
+  .firstTable, .secondTable, .thirdTable {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .wrapperFirst {
+    margin-bottom: 30px;
+
+    .firstTable {
+      height: 186px;
+
+    }
+
+    .blockButtons {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .wrapperSecond {
+    margin-bottom: 15px;
+
+    span {
+      font-size: 18px;
+      color: #000000;
+    }
+
+    .secondTable {
+      height: 121px;
+
+    }
+  }
+
+  .wrapperThird {
+    span {
+      font-size: 18px;
+      color: #000000;
+    }
+
+    .thirdTable {
+      height: 151px;
+
+    }
+
+    .textBlock {
+      margin-top: 15px;
+      margin-bottom: 35px;
+
+      .firstText {
+        div:nth-child(1) {
+          display: inline-block;
+          margin-left: 10px;
+          width: 30px;
+          height: 2px;
+          vertical-align: middle;
+          background-color: #3f48cc;
+        }
+
+        div:nth-child(2) {
+          display: inline-block;
+          margin-left: 7px;
+          width: 20px;
+          height: 1px;
+          vertical-align: middle;
+          background-color: #3f3f3f;
+
+        }
+
+        span {
+          margin-left: 10px;
+          line-height: 12px;
+          font-size: 12px;
+          color: #3f3f3f;
+        }
+      }
+
+      .secondText {
+        div:nth-child(1) {
+          display: inline-block;
+          margin-left: 10px;
+          width: 30px;
+          height: 2px;
+          vertical-align: middle;
+          background-color: #ed1c24;
+        }
+
+        div:nth-child(2) {
+          display: inline-block;
+          margin-left: 7px;
+          width: 20px;
+          height: 1px;
+          vertical-align: middle;
+          background-color: #3f3f3f;
+
+        }
+
+        span {
+          margin-left: 10px;
+          line-height: 12px;
+          font-size: 12px;
+          color: #3f3f3f;
+        }
+      }
+
+      .thirdText {
+        div:nth-child(1) {
+          display: inline-block;
+          margin-left: 20px;
+          width: 10px;
+          height: 10px;
+          border: 2px solid #3f48cc;
+          border-radius: 50%;
+          vertical-align: middle;
+
+        }
+
+        div:nth-child(2) {
+          display: inline-block;
+          margin-left: 17px;
+          width: 20px;
+          height: 1px;
+          vertical-align: middle;
+          background-color: #3f3f3f;
+
+        }
+
+        span {
+          margin-left: 10px;
+          line-height: 12px;
+          font-size: 12px;
+          color: #3f3f3f;
+        }
+      }
+    }
+  }
+}

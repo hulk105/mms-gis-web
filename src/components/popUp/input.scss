@@ -1,0 +1,22 @@
+.input {
+  width: 100%;
+  //margin: 0 15px;
+  font-size: 14px;
+  color: #04020d;
+
+  label {
+    display: inline-block;
+    min-width: 137px;
+
+  }
+
+  input {
+    padding: 0;
+    min-width: 190px;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-left: none;
+    outline: none;
+  }
+}

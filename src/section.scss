@@ -1,0 +1,12 @@
+section {
+  .map {
+    position: relative;
+    margin-bottom: 12px;
+    border: 1px solid black;
+  }
+
+  .underMap {
+    display: flex;
+    justify-content: space-between;
+  }
+}

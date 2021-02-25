@@ -1,0 +1,27 @@
+.header {
+  height: 40px;
+  background-color: #00897b;
+
+  span {
+    color: #fff;
+    line-height: 40px;
+    letter-spacing: 1px;
+  }
+
+  .firstSpan {
+    margin: 0 8px;
+    text-transform: uppercase;
+  }
+}
+
+.wrapperCenter {
+  margin: 0 auto;
+  width: 1580px;
+  height: 760px;
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  margin: 6px 12px;
+}
