@@ -43,7 +43,8 @@
     ]
   },
   "devDependencies": {
-    "redux-devtools": "^3.7.0"
+    "redux-devtools": "^3.7.0",
+    "worker-loader": "^3.0.8"
   },
   "proxy": "http://localhost:8080"
 }

@@ -11,7 +11,7 @@ import cities from './assets/img/cities.jpg';
 
 import {clearIdFirst, clearIdSecond, clearIdThird} from './Rudux/action';
 import './section.scss';
-
+import Map from "./map";
 
 function Section() {
 	const dispatch = useDispatch();
@@ -35,10 +35,11 @@ function Section() {
 	const startDraw = () => {
 		setMap( cities );
 	};
+
 	return (
 		<section>
-			<div className={ 'map' }>
-				<img src={ map } alt={ 'map' }/>
+			<div className={ 'map' } id='map'>
+				<Map/>
 				{ showPopUp && <PopUp/> }
 			</div>
 			<div className={ 'underMap' }>
