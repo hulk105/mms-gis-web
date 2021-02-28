@@ -28,7 +28,7 @@ const Map = () => {
   }, []);
 
   return (
-      <div>
+      <div className='global-map'>
         <div className='sidebar'>
           Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
         </div>

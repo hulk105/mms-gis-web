@@ -1,5 +1,7 @@
 .map-container {
-  position: absolute;
+  position: sticky;
+  height: 600px;
+  width: 1000px;
   top: 0;
   right: 0;
   left: 0;
@@ -17,4 +19,12 @@
   left: 0;
   margin: 12px;
   border-radius: 4px;
+}
+
+.mapboxgl-ctrl-attrib-inner {
+  display: none;
+}
+
+.mapboxgl-ctrl-attrib-button {
+  display: none;
 }

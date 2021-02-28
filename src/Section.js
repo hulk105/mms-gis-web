@@ -38,7 +38,7 @@ function Section() {
 
 	return (
 		<section>
-			<div className={ 'map' } id='map'>
+			<div className={ 'map' }>
 				<Map/>
 				{ showPopUp && <PopUp/> }
 			</div>
