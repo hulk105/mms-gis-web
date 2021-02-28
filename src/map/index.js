@@ -4,12 +4,15 @@ import './map.scss';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXNkNzI2IiwiYSI6ImNrbDZ4dW5lbTJtNm4zMG1zZjhhMmo1d28ifQ.Hy6v6YxQfGTapr-SsS4eqQ'
 
+const defaultLongitude = 5;
+const defaultLatitude = 34;
+const defaultZoom = 1.5;
+
 const Map = () => {
   const mapContainer = useRef(null);
-
-  const [lng, setLng] = useState(5)
-  const [lat, setLat] = useState(34);
-  const [zoom, setZoom] = useState(1.5);
+  const [lng, setLng] = useState(defaultLongitude)
+  const [lat, setLat] = useState(defaultLatitude);
+  const [zoom, setZoom] = useState(defaultZoom);
 
   useEffect(() => {
     const map = new mapboxgl.Map({
