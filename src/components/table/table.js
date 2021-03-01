@@ -28,7 +28,7 @@ function Table({mock, radius = true, selectedId, func}) {
                             <td className={'rowSecond'}>{curr.id}</td>
                             <td className={'rowThird'}>{curr.x}</td>
                             <td className={'rowFourth'}>{curr.y}</td>
-                            <td className={'rowFifth'}>{mock.tag}</td>
+                            <td className={'rowFifth'}>{group.tag}</td>
                         </tr>);
                 })
             })}
