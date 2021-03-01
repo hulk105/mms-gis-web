@@ -9,9 +9,6 @@ const initialState = {
                 x: '48.30',
                 y: '32.18'
             },
-            absX: 714,
-            absY: 714,
-            radius: 30,
             tag: 'Переробка'
         },
         {
@@ -20,9 +17,6 @@ const initialState = {
                 x: '48.30',
                 y: '32.18'
             },
-            absX: 814,
-            absY: 312,
-            radius: 25,
             tag: 'Переробка'
         },
         {
@@ -31,9 +25,6 @@ const initialState = {
                 x: '48.30',
                 y: '32.18'
             },
-            absX: 814,
-            absY: 312,
-            radius: 25,
             tag: 'Переробка'
         },
         {
@@ -42,9 +33,6 @@ const initialState = {
                 x: '48.30',
                 y: '32.18'
             },
-            absX: 814,
-            absY: 312,
-            radius: 25,
             tag: 'Переробка'
         },
         {
@@ -53,9 +41,6 @@ const initialState = {
                 x: '48.30',
                 y: '32.18'
             },
-            absX: 814,
-            absY: 312,
-            radius: 25,
             tag: 'Переробка'
         }
     ]
