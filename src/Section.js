@@ -14,7 +14,11 @@ import './section.scss';
 import Map from "./map";
 
 function Section() {
+
 	const dispatch = useDispatch();
+
+	const {idSecondTable, secondTable} = useSelector(state => state.secondTableReducer);
+
 	const { showPopUp } = useSelector( state => state.showPopUpReducer );
 	const [ map, setMap ] = React.useState( empty );
 
@@ -39,7 +43,7 @@ function Section() {
 	return (
 		<section>
 			<div className={ 'map' }>
-				<Map/>
+				<Map pollution = {secondTable}/>
 				{ showPopUp && <PopUp/> }
 			</div>
 			<div className={ 'underMap' }>
