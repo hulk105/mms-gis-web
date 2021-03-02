@@ -1,5 +1,7 @@
 .buttonBlock {
-  button + button {
-    margin-left: 8px;
-  }
+  display: inline-block;
+}
+
+.buttonBlock button {
+  margin-right: 5px;
 }

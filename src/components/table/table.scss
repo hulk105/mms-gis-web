@@ -29,10 +29,6 @@ table {
     .row {
       cursor: pointer;
 
-      &:nth-child(even) {
-        background-color: #efeff9;
-      }
-
       td {
         height: 30px;
         font-size: 10px;
@@ -99,6 +95,10 @@ table {
           border-color: transparent transparent transparent #424242;
         }
       }
+    }
+
+    .coloredRow {
+      background-color: greenyellow;
     }
 
     .activeLine {
