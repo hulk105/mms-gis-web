@@ -3,7 +3,7 @@ import React from 'react';
 import './table.scss';
 
 function Table({mock, radius = true, selectedId, func}) {
-    let flag = false;
+    let isColored = false;
     return (
         <table>
             <thead>
@@ -17,17 +17,17 @@ function Table({mock, radius = true, selectedId, func}) {
             </thead>
             <tbody>
             {mock.map((group) => {
-                const coloredGroup = flag ? 'coloredRow' : '';
-                flag = !flag;
-                return group.points.map((curr, id) => {
-                    const activeClass = curr.id === selectedId ? 'activeLine' : '';
+                const coloredGroup = isColored ? 'coloredRow' : '';
+                isColored = !isColored;
+                return group.points.map((point, id) => {
+                    const activeClass = point.id === selectedId ? 'activeLine' : '';
                     const activeFirstRow = activeClass ? 'activeFirstRow' : '';
                     return (
-                        <tr className={`row ${activeClass} ${coloredGroup}`} key={` ${id}-${curr.id}`} onClick={() => func(curr.id)}>
+                        <tr className={`row ${activeClass} ${coloredGroup}`} key={` ${id}-${point.id}`} onClick={() => func(point.id)}>
                             <td className={`rowFirst ${activeFirstRow}`}>&nbsp; </td>
-                            <td className={'rowSecond'}>{curr.id}</td>
-                            <td className={'rowThird'}>{curr.x}</td>
-                            <td className={'rowFourth'}>{curr.y}</td>
+                            <td className={'rowSecond'}>{point.id}</td>
+                            <td className={'rowThird'}>{point.x}</td>
+                            <td className={'rowFourth'}>{point.y}</td>
                             <td className={'rowFifth'}>{group.tag}</td>
                         </tr>);
                 })

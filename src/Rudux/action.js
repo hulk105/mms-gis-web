@@ -1,4 +1,5 @@
 import {types} from './types';
+import {Group} from "../model/group.js";
 
 export const showOpen = ({
     type: types.SHOW_POPUP
@@ -20,7 +21,6 @@ export const addTableRow = (data) => ({
     type: types.ADD_ROW_FIRST_TABLE,
     payload: data
 });
-
 
 export const deleteTableRow = (id) => ({
     type: types.DELETE_ROW_FIRST_TABLE,
@@ -46,7 +46,6 @@ export const clearIdFirst = ({
     type: types.CLEAR_SELECTED_ID_FIRST
 });
 
-
 export const clearIdSecond = ({
     type: types.CLEAR_SELECTED_ID_SECOND
 });
@@ -61,10 +60,9 @@ export const postSave = (bool) => ({
     payload: bool
 })
 
-//Async
-export const getGisData = () => async (dispatch) => {
+export const getResearchGroups = () => async (dispatch) => {
     try {
-        fetchAndParse(dispatch, '/gis/all', types.PUT_FIRST_TABLE)
+        fetchAndParse(dispatch, '/group?section=RESEARCH', types.PUT_FIRST_TABLE)
     } catch (error) {
         console.log(error);
     }
@@ -72,10 +70,9 @@ export const getGisData = () => async (dispatch) => {
 
 export const getTables = () => async (dispatch) => {
     try {
-        fetchAndParse(dispatch, '/gis/all', types.PUT_FIRST_TABLE);
-        fetchAndParse(dispatch, '/influence/all', types.PUT_SECOND_TABLE);
-        fetchAndParse(dispatch, '/city/all', types.PUT_THIRD_TABLE);
-
+        fetchAndParse(dispatch, '/group?section=RESEARCH', types.PUT_FIRST_TABLE);
+        fetchAndParse(dispatch, '/group?section=INFLUENCE', types.PUT_SECOND_TABLE);
+        fetchAndParse(dispatch, '/group?section=CITIES', types.PUT_THIRD_TABLE);
     } catch (error) {
         console.log(error);
     }
@@ -85,8 +82,9 @@ function fetchAndParse(dispatch, url, type) {
     fetch(url)
         .then(async (data) => {
             if (data.ok) {
-                const json = await data.json();
-                dispatch({type, payload: json});
+                const groupsJSON = await data.json();
+                const groups = groupsJSON.map(groupsJSON =>new Group(groupsJSON));
+                dispatch({type, payload: groups});
             }
         }).catch(error => {
         console.log('Connection error', error);
@@ -94,33 +92,32 @@ function fetchAndParse(dispatch, url, type) {
     });
 }
 
-export const postData = (body) => async (dispatch) => {
-    const {longitude, latitude, ...rest} = body;
-    const newRow = {...rest, id: 0, point: {x: longitude, y: latitude}};
-
+export const addNewPoint = (pointInfo) => async (dispatch) => {
     try {
-        const data = await fetch('/gis', {
+        console.log(pointInfo);
+        await fetch('/point', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             method: 'post',
-            body: JSON.stringify(newRow)
+            body: JSON.stringify(pointInfo)
         });
-        const dataResponse = await data.json();
-        dispatch(postSave(false));
-        dispatch(addTableRow(dataResponse));
+        dispatch(getTables());
     } catch (error) {
         console.log(error);
     }
 };
 
-
-export const deleteGis = (id) => async (dispatch) => {
+export const deleteSelectedPoint = (id) => async (dispatch) => {
     try {
-        await fetch(`/gis/${id}`, {method: 'delete'});
+        await fetch(`/point/${id}`, {method: 'delete'});
         dispatch(deleteTableRow(id));
     } catch (error) {
         console.log(error);
     }
 };
+
+export const getAllGroups = () => async (dispatch) =>{
+    fetchAndParse(dispatch,'/group/all', types.PUT_GROUPS);
+}

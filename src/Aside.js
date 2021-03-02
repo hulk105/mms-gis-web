@@ -9,8 +9,8 @@ import {
     clearIdFirst,
     clearIdSecond,
     clearIdThird,
-    deleteGis,
-    getGisData,
+    deleteSelectedPoint, getAllGroups,
+    getResearchGroups,
     getTables,
     setIdFirstTable,
     setIdSecondTable,
@@ -23,7 +23,7 @@ import './aside.scss';
 function Aside() {
     const dispatch = useDispatch();
 
-    const {idFirstTable, firstTable} = useSelector(state => state.firstTableReducer);
+    const {idFirstTable: selectedGroupId, firstTable} = useSelector(state => state.firstTableReducer);
     const {idSecondTable, secondTable} = useSelector(state => state.secondTableReducer);
     const {idThirdTable, thirdTable} = useSelector(state => state.thirdTableReducer);
     const {showPopUp} = useSelector(state => state.showPopUpReducer);
@@ -32,8 +32,16 @@ function Aside() {
         dispatch(getTables());
     }, [dispatch]);
 
-    const loadData = () => {
-        dispatch(getGisData())
+    const loadResearchGroup = () => {
+        dispatch(getResearchGroups());
+    }
+
+    const loadCitiesGroup = () => {
+        dispatch(getCitiesGroup());
+    }
+
+    const loadInfluenceGroup = ()=> {
+        dispatch(getInfluenceGroup());
     }
 
     const showHandle = () => {
@@ -41,10 +49,11 @@ function Aside() {
         dispatch(clearIdSecond);
         dispatch(clearIdThird);
         dispatch(showOpen);
+        dispatch(getAllGroups());
     };
 
     const deleteEntry = () => {
-        dispatch(deleteGis(idFirstTable));
+        dispatch(deleteSelectedPoint(selectedGroupId));
     };
 
     const chosenFirst = (id) => {
@@ -67,12 +76,12 @@ function Aside() {
                     <Table
                         mock={firstTable}
                         func={chosenFirst}
-                        selectedId={idFirstTable}/>
+                        selectedId={selectedGroupId}/>
                 </div>
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadData}
+                        funcOne={loadResearchGroup}
                         funcTwo={deleteEntry}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
@@ -91,12 +100,43 @@ function Aside() {
                 <div className={'secondTable'}>
                     <Table mock={secondTable} func={chosenSecond} selectedId={idSecondTable}/>
                 </div>
+
+                <div className={'blockButtons'}>
+                    <ButtonBlock
+                        funcOne={loadResearchGroup}
+                        funcTwo={deleteEntry}
+                        fontSize={10}
+                        buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
+                        buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
+                    <ButtonBlock
+                        funcOne={showHandle}
+                        funcTwo={null}
+                        fontSize={10}
+                        buttonOne={{width: 140, height: 28}} textOne={'додати забруднення'}
+                        buttonTwo={{width: 125, height: 28}} textTwo={'завантажити мару'}/>
+                </div>
             </div>
             <div className={'wrapperThird'}>
                 <span>Населені пункти</span>
                 <div className={'thirdTable'}>
                     <Table mock={thirdTable} radius={false} func={chosenThird} selectedId={idThirdTable}/>
                 </div>
+
+                <div className={'blockButtons'}>
+                    <ButtonBlock
+                        funcOne={loadResearchGroup}
+                        funcTwo={deleteEntry}
+                        fontSize={10}
+                        buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
+                        buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
+                    <ButtonBlock
+                        funcOne={showHandle}
+                        funcTwo={null}
+                        fontSize={10}
+                        buttonOne={{width: 140, height: 28}} textOne={'додати місто'}
+                        buttonTwo={{width: 125, height: 28}} textTwo={'завантажити мару'}/>
+                </div>
+
                 <div className={'textBlock'}>
                     <div className={'firstText'}>
                         <div/>

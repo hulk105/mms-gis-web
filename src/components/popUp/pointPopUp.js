@@ -3,20 +3,17 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import Input from './input';
 import Button from '../button/button';
-import {closeError, postData, showError, showPopUpClose} from '../../Rudux/action';
+import {closeError, addNewPoint, showError, showPopUpClose} from '../../Rudux/action';
 
 import './popUp.scss';
 
-function PopUp() {
+function PointPopUp({groups, section}) {
     const dispatch = useDispatch();
     const {error} = useSelector(state => state.showPopUpReducer);
     const [dataForm, setDataForm] = React.useState({
-        absX: '',
-        absY: '',
-        longitude: '',
-        latitude: '',
-        radius: '',
-        tag: ''
+        x: '',
+        y: '',
+        groupId: ''
     });
     const [roll, setRoll] = React.useState(false);
     const [turnBack, setTurnBack] = React.useState(false);
@@ -43,23 +40,24 @@ function PopUp() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        const {absX, absY, longitude, latitude, radius, tag} = dataForm;
+        const {x, y, groupId} = dataForm;
 
-        if (absX && absY && longitude && latitude && radius && tag) {
+        if (x && y && groupId) {
             setDataForm({
-                absX: '',
-                absY: '',
-                longitude: '',
-                latitude: '',
-                radius: '',
-                tag: ''
+                x: '',
+                y: '',
+                groupId: ''
             });
             dispatch(showPopUpClose);
-            dispatch(postData(dataForm));
+            dispatch(addNewPoint(dataForm));
 
         } else {
             dispatch(showError);
         }
+    };
+
+    const handleChange = ({ target }) => {
+        dataForm.groupId = target.value;
     };
 
     return (
@@ -80,41 +78,25 @@ function PopUp() {
                 <div className={`popUp__body `}>
                     <form className="wrapper" onSubmit={submitHandler}>
                         <Input
-                            text={'Абс. X'}
-                            name={'absX'}
-                            type={'number'}
-                            value={dataForm.absX}
-                            func={inputHandler}/>
-                        <Input
-                            text={'Абс. Y'}
-                            name={'absY'}
-                            type={'number'}
-                            value={dataForm.absY}
-                            func={inputHandler}/>
-                        <Input
                             text={'Довгота'}
-                            name={'longitude'}
+                            name={'x'}
                             type={'number'}
-                            value={dataForm.longitude}
+                            value={dataForm.x}
                             func={inputHandler}/>
                         <Input
                             text={'Широта'}
-                            name={'latitude'}
+                            name={'y'}
                             type={'number'}
-                            value={dataForm.latitude}
+                            value={dataForm.y}
                             func={inputHandler}/>
-                        <Input
-                            text={'Радіус'}
-                            name={'radius'}
-                            type={'number'}
-                            value={dataForm.radius}
-                            func={inputHandler}/>
-                        <Input
-                            text={'Помітка'}
-                            name={'tag'}
-                            type={'text'}
-                            value={dataForm.tag}
-                            func={inputHandler}/>
+                        <select value={dataForm.groupId}  onChange={handleChange}>
+                            <option>Виберіть групу</option>
+                            {
+                                groups.filter((group)=>group.section === section)
+                                    .map((group)=>
+                                        <option value={group.id} >{`ID - ${group.id} - Секція ${group.section}`}</option>)
+                            }
+                        </select>
                         <div className={'error'}>{error && 'Всі поля мають бути заповнені'}</div>
                         <div>
                             <Button
@@ -129,6 +111,7 @@ function PopUp() {
             }
         </div>
     );
+
 }
 
-export default PopUp;
+export default PointPopUp;

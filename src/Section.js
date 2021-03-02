@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ButtonBlock from './components/button/buttonBlock';
-import PopUp from './components/popUp/popUp';
+import PointPopUp from './components/popUp/pointPopUp';
 
 import empty from './assets/img/empty.jpg';
 import area from './assets/img/area.jpg';
@@ -18,6 +18,8 @@ function Section() {
 	const dispatch = useDispatch();
 
 	const {idSecondTable, secondTable} = useSelector(state => state.secondTableReducer);
+
+	const {groups} = useSelector(state => state.groupsReducer)
 
 	const { showPopUp } = useSelector( state => state.showPopUpReducer );
 	const [ map, setMap ] = React.useState( empty );
@@ -44,7 +46,7 @@ function Section() {
 		<section>
 			<div className={ 'map' }>
 				<Map pollution = {secondTable}/>
-				{ showPopUp && <PopUp/> }
+				{ showPopUp && <PointPopUp groups={groups} section={'RESEARCH'}/> }
 			</div>
 			<div className={ 'underMap' }>
 				<ButtonBlock
