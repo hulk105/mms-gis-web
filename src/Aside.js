@@ -9,7 +9,7 @@ import {
     clearIdFirst,
     clearIdSecond,
     clearIdThird,
-    deleteSelectedPoint, getAllGroups,
+    deleteSelectedPoint, getAllGroups, getCitiesGroup, getInfluenceGroup,
     getResearchGroups,
     getTables,
     setIdFirstTable,
@@ -48,9 +48,23 @@ function Aside() {
         dispatch(clearIdFirst);
         dispatch(clearIdSecond);
         dispatch(clearIdThird);
-        dispatch(showOpen);
         dispatch(getAllGroups());
     };
+
+    const showResearchHandle = () => {
+        showHandle();
+        dispatch(showOpen('RESEARCH'));
+    }
+
+    const showInfluenceHandle = () => {
+        showHandle();
+        dispatch(showOpen('INFLUENCE'));
+    }
+
+    const showCitiesHandle = () => {
+        showHandle();
+        dispatch(showOpen('CITIES'));
+    }
 
     const deleteEntry = () => {
         dispatch(deleteSelectedPoint(selectedGroupId));
@@ -67,7 +81,6 @@ function Aside() {
     const chosenThird = (id) => {
         !showPopUp && dispatch(setIdThirdTable(id));
     };
-
 
     return (
         <aside>
@@ -87,7 +100,7 @@ function Aside() {
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
                     <ButtonBlock
-                        funcOne={showHandle}
+                        funcOne={showResearchHandle}
                         funcTwo={null}
                         fontSize={10}
                         buttonOne={{width: 140, height: 28}} textOne={'додати забруднення'}
@@ -103,13 +116,13 @@ function Aside() {
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadResearchGroup}
+                        funcOne={loadInfluenceGroup}
                         funcTwo={deleteEntry}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
                     <ButtonBlock
-                        funcOne={showHandle}
+                        funcOne={showInfluenceHandle}
                         funcTwo={null}
                         fontSize={10}
                         buttonOne={{width: 140, height: 28}} textOne={'додати забруднення'}
@@ -124,13 +137,13 @@ function Aside() {
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadResearchGroup}
+                        funcOne={loadCitiesGroup}
                         funcTwo={deleteEntry}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
                     <ButtonBlock
-                        funcOne={showHandle}
+                        funcOne={showCitiesHandle}
                         funcTwo={null}
                         fontSize={10}
                         buttonOne={{width: 140, height: 28}} textOne={'додати місто'}

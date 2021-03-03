@@ -2,6 +2,7 @@ import { types } from './types';
 
 const initialState = {
 	showPopUp: false,
+	section: '',
 	error: false
 };
 
@@ -9,7 +10,7 @@ const initialState = {
 export const showPopUpReducer = ( state = initialState, action ) => {
 	switch (action.type) {
 		case types.SHOW_POPUP:
-			return { ...state, showPopUp: true};
+			return { ...state, showPopUp: true, section: action.payload};
 
 		case types.SHOW_CLOSE:
 			return { ...state, showPopUp: false, error: false  };

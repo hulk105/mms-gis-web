@@ -1,8 +1,9 @@
 import {types} from './types';
 import {Group} from "../model/group.js";
 
-export const showOpen = ({
-    type: types.SHOW_POPUP
+export const showOpen = (section) => ({
+    type: types.SHOW_POPUP,
+    payload: section
 });
 
 export const showPopUpClose = ({
@@ -66,6 +67,14 @@ export const getResearchGroups = () => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+export const getInfluenceGroup = () => async (dispatch) => {
+  fetchAndParse(dispatch, '/group?section=INFLUENCE', types.PUT_SECOND_TABLE);
+}
+
+export const getCitiesGroup = () => async (dispatch) => {
+  fetchAndParse(dispatch, '/group?section=CITIES', types.PUT_THIRD_TABLE);
 }
 
 export const getTables = () => async (dispatch) => {

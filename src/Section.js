@@ -17,12 +17,12 @@ function Section() {
 
 	const dispatch = useDispatch();
 
-	const {idSecondTable, secondTable} = useSelector(state => state.secondTableReducer);
+	const {secondTable} = useSelector(state => state.secondTableReducer);
 
 	const {groups} = useSelector(state => state.groupsReducer)
 
-	const { showPopUp } = useSelector( state => state.showPopUpReducer );
-	const [ map, setMap ] = React.useState( empty );
+	const { showPopUp, section } = useSelector( state => state.showPopUpReducer );
+	const [ setMap ] = React.useState( empty );
 
 	const resetAllChoose = () => {
 		dispatch( clearIdFirst );
@@ -46,7 +46,7 @@ function Section() {
 		<section>
 			<div className={ 'map' }>
 				<Map pollution = {secondTable}/>
-				{ showPopUp && <PointPopUp groups={groups} section={'RESEARCH'}/> }
+				{ showPopUp && <PointPopUp groups={groups} section={section}/> }
 			</div>
 			<div className={ 'underMap' }>
 				<ButtonBlock
