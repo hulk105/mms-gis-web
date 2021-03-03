@@ -9,7 +9,7 @@ import {
     clearIdFirst,
     clearIdSecond,
     clearIdThird,
-    deleteSelectedPoint, getAllGroups, getCitiesGroup, getInfluenceGroup,
+    deleteSelectedPoint, getAllGroups,
     getResearchGroups,
     getTables,
     setIdFirstTable,
@@ -48,6 +48,7 @@ function Aside() {
         dispatch(clearIdFirst);
         dispatch(clearIdSecond);
         dispatch(clearIdThird);
+        dispatch(showOpen);
         dispatch(getAllGroups());
     };
 
@@ -82,6 +83,7 @@ function Aside() {
         !showPopUp && dispatch(setIdThirdTable(id));
     };
 
+
     return (
         <aside>
             <div className={'wrapperFirst'}>
@@ -100,7 +102,7 @@ function Aside() {
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
                     <ButtonBlock
-                        funcOne={showResearchHandle}
+                        funcOne={showHandle}
                         funcTwo={null}
                         fontSize={10}
                         buttonOne={{width: 140, height: 28}} textOne={'додати забруднення'}
@@ -143,7 +145,7 @@ function Aside() {
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
                     <ButtonBlock
-                        funcOne={showCitiesHandle}
+                        funcOne={showHandle}
                         funcTwo={null}
                         fontSize={10}
                         buttonOne={{width: 140, height: 28}} textOne={'додати місто'}

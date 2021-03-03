@@ -17,12 +17,14 @@ function Section() {
 
 	const dispatch = useDispatch();
 
-	const {secondTable} = useSelector(state => state.secondTableReducer);
+    const {idFirstTable, firstTable} = useSelector(state => state.firstTableReducer);
+    const {idSecondTable, secondTable} = useSelector(state => state.secondTableReducer);
+    const {idThirdTable, thirdTable} = useSelector(state => state.thirdTableReducer);
 
 	const {groups} = useSelector(state => state.groupsReducer)
 
-	const { showPopUp, section } = useSelector( state => state.showPopUpReducer );
-	const [ setMap ] = React.useState( empty );
+	const { showPopUp } = useSelector( state => state.showPopUpReducer );
+	const [ map, setMap ] = React.useState( empty );
 
 	const resetAllChoose = () => {
 		dispatch( clearIdFirst );
@@ -42,33 +44,33 @@ function Section() {
 		setMap( cities );
 	};
 
-	return (
-		<section>
-			<div className={ 'map' }>
-				<Map pollution = {secondTable}/>
-				{ showPopUp && <PointPopUp groups={groups} section={section}/> }
-			</div>
-			<div className={ 'underMap' }>
-				<ButtonBlock
-					funcOne={ drawMap }
-					funcTwo={ startDraw }
-					fontSize={ 12 }
-					buttonOne={ { width: 206, height: 32 } }
-					buttonTwo={ { width: 206, height: 32 } }
-					textOne={ 'вкажіть територію' }
-					textTwo={ 'почати відмальовку' }/>
-				<ButtonBlock
-					funcOne={ resetAllChoose }
-					funcTwo={ clearMap }
-					fontSize={ 12 }
-					buttonOne={ { width: 206, height: 32 } }
-					buttonTwo={ { width: 66, height: 32 } }
-					textOne={ 'оновити' }
-					textTwo={ 'зтерти' }/>
-			</div>
+    return (
+        <section>
+            <div className={'map'}>
+                <Map research={firstTable} pollution={secondTable} cities={thirdTable}/>
+                {showPopUp && <PointPopUp groups={groups} section={'RESEARCH'}/>}
+            </div>
+            <div className={'underMap'}>
+                <ButtonBlock
+                    funcOne={drawMap}
+                    funcTwo={startDraw}
+                    fontSize={12}
+                    buttonOne={{width: 206, height: 32}}
+                    buttonTwo={{width: 206, height: 32}}
+                    textOne={'вкажіть територію'}
+                    textTwo={'почати відмальовку'}/>
+                <ButtonBlock
+                    funcOne={resetAllChoose}
+                    funcTwo={clearMap}
+                    fontSize={12}
+                    buttonOne={{width: 206, height: 32}}
+                    buttonTwo={{width: 66, height: 32}}
+                    textOne={'оновити'}
+                    textTwo={'зтерти'}/>
+            </div>
 
-		</section>
-	);
+        </section>
+    );
 }
 
 export default Section;
