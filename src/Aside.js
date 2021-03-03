@@ -32,7 +32,7 @@ function Aside() {
         dispatch(getTables());
     }, [dispatch]);
 
-    const loadResearchGroup = () => {
+    /*const loadResearchGroup = () => {
         dispatch(getResearchGroups());
     }
 
@@ -42,7 +42,7 @@ function Aside() {
 
     const loadInfluenceGroup = ()=> {
         dispatch(getInfluenceGroup());
-    }
+    }*/
 
     const showHandle = () => {
         dispatch(clearIdFirst);
@@ -81,7 +81,7 @@ function Aside() {
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadResearchGroup}
+                        funcOne={getResearchGroups}
                         funcTwo={deleteEntry}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
@@ -103,7 +103,7 @@ function Aside() {
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadResearchGroup}
+                        funcOne={getResearchGroups}
                         funcTwo={deleteEntry}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
@@ -124,7 +124,7 @@ function Aside() {
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadResearchGroup}
+                        funcOne={getResearchGroups}
                         funcTwo={deleteEntry}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}

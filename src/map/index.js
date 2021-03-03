@@ -6,9 +6,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXNkNzI2IiwiYSI6ImNrbDZ4dW5lbTJtNm4zMG1zZjhhM
 
 const defaultLongitude = 32.9;
 const defaultLatitude = 49.8;
-const defaultZoom = 7;
+const defaultZoom = 5;
 
-const Map = ({pollution}) => {
+const Map = ({research, pollution, cities}) => {
 
     const mapContainer = useRef(null);
     const [lng, setLng] = useState(defaultLongitude)
@@ -30,11 +30,13 @@ const Map = ({pollution}) => {
         });
 
         map.on('load', () => {
+            research.map(group => drawGroup(map, group, '#3f48cc'));
             pollution.map(group => drawGroup(map, group, '#ed1c24'));
+            research.map(group => drawGroup(map, group, '#3f48cc'));
         });
 
         return () => map.remove();
-    }, []);
+    }, [research, pollution, cities]);
 
     return (
         <div className='global-map'>
@@ -55,25 +57,75 @@ function drawGroup(map, group, color) {
     ]).concat([[parseFloat(group.points[0].x),
         parseFloat(group.points[0].y)]]);
 
-    map.addSource((group.id).toString(), {
-        'type': 'geojson',
-        'data': {
-            'type': 'Feature',
-            'geometry': {
-                'type': 'Polygon',
-                'coordinates': [coordinates]
-            }
+    const data = {
+        'type': 'Feature',
+        'geometry': {
+            'type': 'Polygon',
+            'coordinates': [coordinates]
         }
-    });
+    }
 
-    map.addLayer({
-        'id': (group.id).toString(),
-        'type': 'line',
-        'source': (group.id).toString(),
-        'paint': {
-            'line-color': color,
+    const source = map.getSource((group.id).toString());
+    if (source) {
+        source.setData(data);
+    } else {
+        map.addSource((group.id).toString(), {
+            'type': 'geojson',
+            'data': data
+        });
+    }
+
+    const layer = map.getLayer((group.id).toString());
+    if (!layer) {
+        map.addLayer({
+            'id': (group.id).toString(),
+            'type': 'line',
+            'source': (group.id).toString(),
+            'paint': {
+                'line-color': color,
+            }
+        });
+    }
+}
+
+function drawGroup(map, group, color) {
+    // it is necessary to add the last point in the end
+    // to render closed polygon
+    const coordinates = group.points.map(point => [
+        parseFloat(point.x),
+        parseFloat(point.y)
+    ]).concat([[parseFloat(group.points[0].x),
+        parseFloat(group.points[0].y)]]);
+
+    const data = {
+        'type': 'Feature',
+        'geometry': {
+            'type': 'Polygon',
+            'coordinates': [coordinates]
         }
-    });
+    }
+
+    const source = map.getSource((group.id).toString());
+    if (source) {
+        source.setData(data);
+    } else {
+        map.addSource((group.id).toString(), {
+            'type': 'geojson',
+            'data': data
+        });
+    }
+
+    const layer = map.getLayer((group.id).toString());
+    if (!layer) {
+        map.addLayer({
+            'id': (group.id).toString(),
+            'type': 'line',
+            'source': (group.id).toString(),
+            'paint': {
+                'line-color': color,
+            }
+        });
+    }
 }
 
 export default Map;
