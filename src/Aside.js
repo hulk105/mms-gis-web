@@ -9,21 +9,27 @@ import {
     clearIdFirst,
     clearIdSecond,
     clearIdThird,
-    deleteSelectedPoint, getAllGroups, getCitiesGroup, getInfluenceGroup,
+    deleteRowFirstTable,
+    deleteRowSecondTable,
+    deleteRowThirdTable,
+    deleteSelectedPoint,
+    getAllGroups,
+    getCitiesGroup,
+    getInfluenceGroup,
     getResearchGroups,
     getTables,
     setIdFirstTable,
     setIdSecondTable,
-    setIdThirdTable, showOpen,
+    setIdThirdTable,
+    showOpen,
 } from './Rudux/action';
 
 import './aside.scss';
 
-
 function Aside() {
     const dispatch = useDispatch();
 
-    const {idFirstTable: selectedGroupId, firstTable} = useSelector(state => state.firstTableReducer);
+    const {idFirstTable, firstTable} = useSelector(state => state.firstTableReducer);
     const {idSecondTable, secondTable} = useSelector(state => state.secondTableReducer);
     const {idThirdTable, thirdTable} = useSelector(state => state.thirdTableReducer);
     const {showPopUp} = useSelector(state => state.showPopUpReducer);
@@ -40,7 +46,7 @@ function Aside() {
         dispatch(getCitiesGroup());
     }
 
-    const loadInfluenceGroup = ()=> {
+    const loadInfluenceGroup = () => {
         dispatch(getInfluenceGroup());
     }
 
@@ -67,8 +73,22 @@ function Aside() {
         dispatch(showOpen('CITIES'));
     }
 
-    const deleteEntry = () => {
-        dispatch(deleteSelectedPoint(selectedGroupId));
+    const deleteEntryFirstTable = () => {
+        if (idFirstTable) {
+            dispatch(deleteSelectedPoint(idFirstTable, deleteRowFirstTable));
+        }
+    };
+
+    const deleteEntrySecondTable = () => {
+        if (idSecondTable) {
+            dispatch(deleteSelectedPoint(idSecondTable, deleteRowSecondTable));
+        }
+    };
+
+    const deleteEntryThirdTable = () => {
+        if (idThirdTable) {
+            dispatch(deleteSelectedPoint(idThirdTable, deleteRowThirdTable));
+        }
     };
 
     const chosenFirst = (id) => {
@@ -83,7 +103,6 @@ function Aside() {
         !showPopUp && dispatch(setIdThirdTable(id));
     };
 
-
     return (
         <aside>
             <div className={'wrapperFirst'}>
@@ -91,13 +110,13 @@ function Aside() {
                     <Table
                         mock={firstTable}
                         func={chosenFirst}
-                        selectedId={selectedGroupId}/>
+                        selectedId={idFirstTable}/>
                 </div>
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
                         funcOne={loadResearchGroup}
-                        funcTwo={deleteEntry}
+                        funcTwo={deleteEntryFirstTable}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
@@ -119,7 +138,7 @@ function Aside() {
                 <div className={'blockButtons'}>
                     <ButtonBlock
                         funcOne={loadInfluenceGroup}
-                        funcTwo={deleteEntry}
+                        funcTwo={deleteEntrySecondTable}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
@@ -140,7 +159,7 @@ function Aside() {
                 <div className={'blockButtons'}>
                     <ButtonBlock
                         funcOne={loadCitiesGroup}
-                        funcTwo={deleteEntry}
+                        funcTwo={deleteEntryThirdTable}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>

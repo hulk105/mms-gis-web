@@ -23,7 +23,7 @@ export const addTableRow = (data) => ({
     payload: data
 });
 
-export const deleteTableRow = (id) => ({
+export const deleteRowFirstTable = (id) => ({
     type: types.DELETE_ROW_FIRST_TABLE,
     payload: id
 });
@@ -33,8 +33,18 @@ export const setIdFirstTable = (id) => ({
     payload: id
 });
 
+export const deleteRowSecondTable = (id) => ({
+    type: types.DELETE_ROW_SECOND_TABLE,
+    payload: id
+});
+
 export const setIdSecondTable = (id) => ({
     type: types.SET_ID_SECOND_TABLE,
+    payload: id
+});
+
+export const deleteRowThirdTable = (id) => ({
+    type: types.DELETE_ROW_THIRD_TABLE,
     payload: id
 });
 
@@ -118,10 +128,10 @@ export const addNewPoint = (pointInfo) => async (dispatch) => {
     }
 };
 
-export const deleteSelectedPoint = (id) => async (dispatch) => {
+export const deleteSelectedPoint = (id, dispatchFunction) => async (dispatch) => {
     try {
         await fetch(`/point/${id}`, {method: 'delete'});
-        dispatch(deleteTableRow(id));
+        dispatch(dispatchFunction(id));
     } catch (error) {
         console.log(error);
     }

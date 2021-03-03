@@ -84,6 +84,12 @@ const initialState = {
     ]
 };
 
+function removePoint(state, id) {
+    state.secondTable.map((group) =>
+        group.points = group.points.filter(point => point.id !== id));
+    return state.secondTable;
+}
+
 export const secondTableReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.SET_ID_SECOND_TABLE:
@@ -91,6 +97,9 @@ export const secondTableReducer = (state = initialState, action) => {
 
         case types.PUT_SECOND_TABLE:
             return {...state, secondTable: action.payload};
+
+        case types.DELETE_ROW_SECOND_TABLE:
+            return {...state, secondTable: removePoint(state, action.payload)};
 
         case types.CLEAR_SELECTED_ID_SECOND:
             return {...state, idSecondTable: null};

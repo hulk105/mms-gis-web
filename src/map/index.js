@@ -51,6 +51,10 @@ const Map = ({research, pollution, cities}) => {
 function drawGroup(map, group, color) {
     // it is necessary to add the last point in the end
     // to render closed polygon
+    if(!group.points.length){
+        return;
+    }
+
     const coordinates = group.points.map(point => [
         parseFloat(point.x),
         parseFloat(point.y)
