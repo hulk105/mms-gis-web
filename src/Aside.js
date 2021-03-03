@@ -9,7 +9,7 @@ import {
     clearIdFirst,
     clearIdSecond,
     clearIdThird,
-    deleteSelectedPoint, getAllGroups,
+    deleteSelectedPoint, getAllGroups, getCitiesGroup, getInfluenceGroup,
     getResearchGroups,
     getTables,
     setIdFirstTable,
