@@ -1,11 +1,12 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
-import {addNewGroup, closeError, showError, showPopUpClose} from "../../Rudux/action";
+import {useDispatch, useSelector} from 'react-redux';
+import {addNewGroup, closeAddGroupPopUp, closeError, showError} from "../../Rudux/action";
 import Input from "../popUp/input";
 import Button from "../button/button";
 
 const AddGroupPopUp = ({section}) => {
   const dispatch = useDispatch();
+  const {error} = useSelector(state => state.showPopUpReducer);
 
   const [dataForm, setDataForm] = React.useState({
     tag: '',
@@ -15,13 +16,13 @@ const AddGroupPopUp = ({section}) => {
   const [rollDown, setRollback] = React.useState(false);
   const [turnBack, setTurnBack] = React.useState(false);
 
-  const inputHandler = (e) => {
+  const inputHandler = (event) => {
     dispatch(closeError);
-    setDataForm({...dataForm, [e.target.name]: e.target.value});
+    setDataForm({...dataForm, [event.target.name]: event.target.value});
   };
 
-  const closeGroupPopUp = () => {
-    dispatch(showPopUpClose);
+  const closePopUp = () => {
+    dispatch(closeAddGroupPopUp);
   };
   const turnBackHandler = () => {
     setRollback(false);
@@ -42,9 +43,8 @@ const AddGroupPopUp = ({section}) => {
         tag: '',
         section: ''
       });
-      dispatch(showPopUpClose);
+      dispatch(closeAddGroupPopUp);
       dispatch(addNewGroup(dataForm));
-
     } else {
       dispatch(showError);
     }
@@ -56,7 +56,7 @@ const AddGroupPopUp = ({section}) => {
           <div className={'wrapperControl'}>
             <div className="roll" onClick={rollDownHandler}/>
             <div className="turnBack" onClick={turnBackHandler}/>
-            <div className="close" onClick={closeGroupPopUp}/>
+            <div className="close" onClick={closePopUp}/>
           </div>
         </div>
         {!rollDown && (<>

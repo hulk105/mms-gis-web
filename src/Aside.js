@@ -14,17 +14,19 @@ import {
     deleteRowThirdTable,
     deleteSelectedPoint,
     getAllGroups,
-    getCitiesGroup,
-    getInfluenceGroup,
-    getResearchGroups,
     getTables,
     setIdFirstTable,
     setIdSecondTable,
     setIdThirdTable,
+    showAddGroupPopUp,
     showOpen,
 } from './Rudux/action';
 
 import './aside.scss';
+
+const RESEARCH = 'RESEARCH';
+const INFLUENCE = 'INFLUENCE';
+const CITIES = 'CITIES';
 
 function Aside() {
     const dispatch = useDispatch();
@@ -38,67 +40,67 @@ function Aside() {
         dispatch(getTables());
     }, [dispatch]);
 
-    const loadResearchGroup = () => {
-        dispatch(getResearchGroups());
-    }
-
-    const loadCitiesGroup = () => {
-        dispatch(getCitiesGroup());
-    }
-
-    const loadInfluenceGroup = () => {
-        dispatch(getInfluenceGroup());
-    }
-
-    const showHandle = () => {
+    const showHandler = () => {
         dispatch(clearIdFirst);
         dispatch(clearIdSecond);
         dispatch(clearIdThird);
         dispatch(getAllGroups());
     };
 
-    const showResearchHandle = () => {
-        showHandle();
-        dispatch(showOpen('RESEARCH'));
+    const showAddPointPopUpForResearchSection = () => {
+        showHandler();
+        dispatch(showOpen(RESEARCH));
     }
 
-    const showInfluenceHandle = () => {
-        showHandle();
-        dispatch(showOpen('INFLUENCE'));
+    const showAddPointPopUpForInfluenceSection = () => {
+        showHandler();
+        dispatch(showOpen(INFLUENCE));
     }
 
-    const showCitiesHandle = () => {
-        showHandle();
-        dispatch(showOpen('CITIES'));
+    const showAddPointPopUpForCitiesSection = () => {
+        showHandler();
+        dispatch(showOpen(CITIES));
     }
 
-    const deleteEntryFirstTable = () => {
+    const showAddGroupPopUpForResearchSection = () => {
+        dispatch(showAddGroupPopUp(RESEARCH));
+    }
+
+    const showAddGroupPopUpForInfluenceSection = () => {
+        dispatch(showAddGroupPopUp(INFLUENCE));
+    }
+
+    const showAddGroupPopUpForCitiesSection = () => {
+        dispatch(showAddGroupPopUp(CITIES));
+    }
+
+    const deleteSelectedPointFromTheResearchTable = () => {
         if (idFirstTable) {
             dispatch(deleteSelectedPoint(idFirstTable, deleteRowFirstTable));
         }
     };
 
-    const deleteEntrySecondTable = () => {
+    const deleteSelectedPointFromTheInfluenceTable = () => {
         if (idSecondTable) {
             dispatch(deleteSelectedPoint(idSecondTable, deleteRowSecondTable));
         }
     };
 
-    const deleteEntryThirdTable = () => {
+    const deleteSelectedPointFromTheCitiesTable = () => {
         if (idThirdTable) {
             dispatch(deleteSelectedPoint(idThirdTable, deleteRowThirdTable));
         }
     };
 
-    const chosenFirst = (id) => {
+    const chooseThePointInTheFirstTable = (id) => {
         !showPopUp && dispatch(setIdFirstTable(id));
     };
 
-    const chosenSecond = (id) => {
+    const chooseThePointInTheSecondTable = (id) => {
         !showPopUp && dispatch(setIdSecondTable(id));
     };
 
-    const chosenThird = (id) => {
+    const chooseThePointInTheThirdTable = (id) => {
         !showPopUp && dispatch(setIdThirdTable(id));
     };
 
@@ -108,66 +110,66 @@ function Aside() {
                 <div className={'firstTable'}>
                     <Table
                         mock={firstTable}
-                        func={chosenFirst}
+                        func={chooseThePointInTheFirstTable}
                         selectedId={idFirstTable}/>
                 </div>
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadResearchGroup}
-                        funcTwo={deleteEntryFirstTable}
-                        fontSize={10}
-                        buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
-                        buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
-                    <ButtonBlock
-                        funcOne={showResearchHandle}
+                        funcOne={showAddGroupPopUpForResearchSection}
                         funcTwo={null}
                         fontSize={10}
-                        buttonOne={{width: 140, height: 28}} textOne={'додати забруднення'}
-                        buttonTwo={{width: 125, height: 28}} textTwo={'завантажити мару'}/>
+                        buttonOne={{width: 120, height: 28}} textOne={'Додати дослідження'}
+                        buttonTwo={{width: 120, height: 28}} textTwo={'Видалити дослідження'}/>
+                    <ButtonBlock
+                        funcOne={showAddPointPopUpForResearchSection}
+                        funcTwo={deleteSelectedPointFromTheResearchTable}
+                        fontSize={10}
+                        buttonOne={{width: 140, height: 28}} textOne={'Додати точку'}
+                        buttonTwo={{width: 125, height: 28}} textTwo={'Видалити точку'}/>
                 </div>
             </div>
 
             <div className={'wrapperSecond'}>
                 <span>Активні осередки впливу</span>
                 <div className={'secondTable'}>
-                    <Table mock={secondTable} func={chosenSecond} selectedId={idSecondTable}/>
+                    <Table mock={secondTable} func={chooseThePointInTheSecondTable} selectedId={idSecondTable}/>
                 </div>
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadInfluenceGroup}
-                        funcTwo={deleteEntrySecondTable}
-                        fontSize={10}
-                        buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
-                        buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
-                    <ButtonBlock
-                        funcOne={showInfluenceHandle}
+                        funcOne={showAddGroupPopUpForInfluenceSection}
                         funcTwo={null}
                         fontSize={10}
-                        buttonOne={{width: 140, height: 28}} textOne={'додати забруднення'}
-                        buttonTwo={{width: 125, height: 28}} textTwo={'завантажити мару'}/>
+                        buttonOne={{width: 120, height: 28}} textOne={'Додати катаклізм'}
+                        buttonTwo={{width: 120, height: 28}} textTwo={'Видалити катаклізм'}/>
+                    <ButtonBlock
+                        funcOne={showAddPointPopUpForInfluenceSection}
+                        funcTwo={deleteSelectedPointFromTheInfluenceTable}
+                        fontSize={10}
+                        buttonOne={{width: 140, height: 28}} textOne={'Додати точку'}
+                        buttonTwo={{width: 125, height: 28}} textTwo={'Видалити точку'}/>
                 </div>
             </div>
             <div className={'wrapperThird'}>
                 <span>Населені пункти</span>
                 <div className={'thirdTable'}>
-                    <Table mock={thirdTable} radius={false} func={chosenThird} selectedId={idThirdTable}/>
+                    <Table mock={thirdTable} radius={false} func={chooseThePointInTheThirdTable} selectedId={idThirdTable}/>
                 </div>
 
                 <div className={'blockButtons'}>
                     <ButtonBlock
-                        funcOne={loadCitiesGroup}
-                        funcTwo={deleteEntryThirdTable}
-                        fontSize={10}
-                        buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
-                        buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
-                    <ButtonBlock
-                        funcOne={showCitiesHandle}
+                        funcOne={showAddGroupPopUpForCitiesSection}
                         funcTwo={null}
                         fontSize={10}
-                        buttonOne={{width: 140, height: 28}} textOne={'додати місто'}
-                        buttonTwo={{width: 125, height: 28}} textTwo={'завантажити мару'}/>
+                        buttonOne={{width: 120, height: 28}} textOne={'Додати місто'}
+                        buttonTwo={{width: 120, height: 28}} textTwo={'Видалити місто'}/>
+                    <ButtonBlock
+                        funcOne={showAddPointPopUpForCitiesSection}
+                        funcTwo={deleteSelectedPointFromTheCitiesTable}
+                        fontSize={10}
+                        buttonOne={{width: 140, height: 28}} textOne={'Додати точку'}
+                        buttonTwo={{width: 125, height: 28}} textTwo={'Видалити точку'}/>
                 </div>
 
                 <div className={'textBlock'}>
@@ -187,11 +189,6 @@ function Aside() {
                         <span>показує населені пункти, які потенційно можуть потрапити в зону впливу</span>
                     </div>
                 </div>
-                <Button
-                    func={null}
-                    size={{width: 174, height: 28}}
-                    text={'зберегти дані'}
-                    fontSize={10}/>
             </div>
         </aside>
     );

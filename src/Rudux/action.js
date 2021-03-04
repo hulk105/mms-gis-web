@@ -18,6 +18,15 @@ export const closeError = ({
     type: types.CLOSE_ERROR
 });
 
+export const showAddGroupPopUp = (section) => ({
+    type:types.SHOW_ADD_GROUP_POP_UP,
+    payload: section
+});
+
+export const closeAddGroupPopUp = ({
+    type: types.CLOSE_ADD_GROUP_POP_UP
+})
+
 export const addTableRow = (data) => ({
     type: types.ADD_ROW_FIRST_TABLE,
     payload: data

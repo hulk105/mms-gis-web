@@ -3,7 +3,8 @@ import { types } from './types';
 const initialState = {
 	showPopUp: false,
 	section: '',
-	error: false
+	error: false,
+	showAddGroupPopUp: false,
 };
 
 
@@ -12,8 +13,14 @@ export const showPopUpReducer = ( state = initialState, action ) => {
 		case types.SHOW_POPUP:
 			return { ...state, showPopUp: true, section: action.payload};
 
+		case types.SHOW_ADD_GROUP_POP_UP:
+			return {...state, showAddGroupPopUp: true,section: action.payload}
+
 		case types.SHOW_CLOSE:
 			return { ...state, showPopUp: false, error: false  };
+
+		case types.CLOSE_ADD_GROUP_POP_UP:
+			return { ...state, showAddGroupPopUp: false, error: false  };
 
 		case types.SHOW_ERROR:
 			return { ...state, error: true };

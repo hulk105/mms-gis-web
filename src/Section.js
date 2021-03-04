@@ -12,19 +12,20 @@ import cities from './assets/img/cities.jpg';
 import {clearIdFirst, clearIdSecond, clearIdThird} from './Rudux/action';
 import './section.scss';
 import Map from "./map";
+import AddGroupPopUp from "./components/add-group-pop-up";
 
 function Section() {
 
 	const dispatch = useDispatch();
 
-    const {idFirstTable, firstTable} = useSelector(state => state.firstTableReducer);
-    const {idSecondTable, secondTable} = useSelector(state => state.secondTableReducer);
-    const {idThirdTable, thirdTable} = useSelector(state => state.thirdTableReducer);
+    const {firstTable} = useSelector(state => state.firstTableReducer);
+    const {secondTable} = useSelector(state => state.secondTableReducer);
+    const {thirdTable} = useSelector(state => state.thirdTableReducer);
 
 	const {groups} = useSelector(state => state.groupsReducer)
 
-	const { showPopUp, section } = useSelector( state => state.showPopUpReducer );
-	const [ map, setMap ] = React.useState( empty );
+	const { showPopUp, showAddGroupPopUp, section } = useSelector( state => state.showPopUpReducer );
+	const [ setMap ] = React.useState( empty );
 
 	const resetAllChoose = () => {
 		dispatch( clearIdFirst );
@@ -49,6 +50,7 @@ function Section() {
             <div className={'map'}>
                 <Map research={firstTable} pollution={secondTable} cities={thirdTable}/>
                 {showPopUp && <PointPopUp groups={groups} section={section}/>}
+								{showAddGroupPopUp && <AddGroupPopUp section={section}/>}
             </div>
             <div className={'underMap'}>
                 <ButtonBlock
