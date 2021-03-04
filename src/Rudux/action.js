@@ -131,7 +131,7 @@ export const addNewPoint = (pointInfo) => async (dispatch) => {
 export const deleteSelectedPoint = (id, dispatchFunction) => async (dispatch) => {
     try {
         await fetch(`/point/${id}`, {method: 'delete'});
-        dispatch(dispatchFunction(id));
+        dispatch(getTables());
     } catch (error) {
         console.log(error);
     }
