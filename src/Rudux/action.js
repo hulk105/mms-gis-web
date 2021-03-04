@@ -113,7 +113,6 @@ function fetchAndParse(dispatch, url, type) {
 
 export const addNewPoint = (pointInfo) => async (dispatch) => {
     try {
-        console.log(pointInfo);
         await fetch('/point', {
             headers: {
                 'Accept': 'application/json',
@@ -139,4 +138,20 @@ export const deleteSelectedPoint = (id, dispatchFunction) => async (dispatch) =>
 
 export const getAllGroups = () => async (dispatch) =>{
     fetchAndParse(dispatch,'/group/all', types.PUT_GROUPS);
+}
+
+export const addNewGroup = (groupInfo) => async (dispatch) => {
+    try {
+        await fetch('/group',{
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify(groupInfo)
+        })
+        dispatch(getTables());
+    } catch (error) {
+        console.log(error);
+    }
 }

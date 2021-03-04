@@ -94,7 +94,7 @@ function PointPopUp({groups, section}) {
                             {
                                 groups.filter((group)=> group.section === section)
                                     .map((group)=>
-                                        <option value={group.id} >{`ID - ${group.id} - Секція ${group.section}`}</option>)
+                                        <option value={group.id} >{`${group.id}. ${group.tag}`}</option>)
                             }
                         </select>
                         <div className={'error'}>{error && 'Всі поля мають бути заповнені'}</div>
