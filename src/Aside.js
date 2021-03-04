@@ -54,7 +54,6 @@ function Aside() {
         dispatch(clearIdFirst);
         dispatch(clearIdSecond);
         dispatch(clearIdThird);
-        dispatch(showOpen);
         dispatch(getAllGroups());
     };
 
@@ -121,7 +120,7 @@ function Aside() {
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
                     <ButtonBlock
-                        funcOne={showHandle}
+                        funcOne={showResearchHandle}
                         funcTwo={null}
                         fontSize={10}
                         buttonOne={{width: 140, height: 28}} textOne={'додати забруднення'}
@@ -164,7 +163,7 @@ function Aside() {
                         buttonOne={{width: 120, height: 28}} textOne={'завантажити дані'}
                         buttonTwo={{width: 120, height: 28}} textTwo={' видалити запис'}/>
                     <ButtonBlock
-                        funcOne={showHandle}
+                        funcOne={showCitiesHandle}
                         funcTwo={null}
                         fontSize={10}
                         buttonOne={{width: 140, height: 28}} textOne={'додати місто'}

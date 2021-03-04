@@ -35,7 +35,6 @@ function PointPopUp({groups, section}) {
         const tag = e.target.name === 'tag' ? e.target.value : Number(e.target.value);
         dispatch(closeError);
         setDataForm({...dataForm, [e.target.name]: tag});
-
     };
 
     const submitHandler = (e) => {
@@ -58,6 +57,7 @@ function PointPopUp({groups, section}) {
 
     const handleChange = ({ target }) => {
         dataForm.groupId = target.value;
+        setDataForm({...dataForm,[dataForm.groupId]:target.value});
     };
 
     return (
@@ -92,7 +92,7 @@ function PointPopUp({groups, section}) {
                         <select value={dataForm.groupId}  onChange={handleChange}>
                             <option>Виберіть групу</option>
                             {
-                                groups.filter((group)=>group.section === section)
+                                groups.filter((group)=> group.section === section)
                                     .map((group)=>
                                         <option value={group.id} >{`ID - ${group.id} - Секція ${group.section}`}</option>)
                             }

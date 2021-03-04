@@ -23,7 +23,7 @@ function Section() {
 
 	const {groups} = useSelector(state => state.groupsReducer)
 
-	const { showPopUp } = useSelector( state => state.showPopUpReducer );
+	const { showPopUp, section } = useSelector( state => state.showPopUpReducer );
 	const [ map, setMap ] = React.useState( empty );
 
 	const resetAllChoose = () => {
@@ -48,7 +48,7 @@ function Section() {
         <section>
             <div className={'map'}>
                 <Map research={firstTable} pollution={secondTable} cities={thirdTable}/>
-                {showPopUp && <PointPopUp groups={groups} section={'RESEARCH'}/>}
+                {showPopUp && <PointPopUp groups={groups} section={section}/>}
             </div>
             <div className={'underMap'}>
                 <ButtonBlock
