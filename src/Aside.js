@@ -2,7 +2,6 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import ButtonBlock from './components/button/buttonBlock';
-import Button from './components/button/button';
 import Table from './components/table/table';
 
 import {
