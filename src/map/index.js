@@ -32,7 +32,7 @@ const Map = ({research, pollution, cities}) => {
         map.on('load', () => {
             research.map(group => drawGroup(map, group, '#3f48cc'));
             pollution.map(group => drawGroup(map, group, '#ed1c24'));
-            research.map(group => drawGroup(map, group, '#3f48cc'));
+            cities.map(group => drawGroup(map, group, '#3f48cc', true));
         });
 
         return () => map.remove();
@@ -48,10 +48,10 @@ const Map = ({research, pollution, cities}) => {
     )
 }
 
-function drawGroup(map, group, color) {
+function drawGroup(map, group, color, fill = false) {
     // it is necessary to add the last point in the end
     // to render closed polygon
-    if(!group.points.length){
+    if (!group.points.length) {
         return;
     }
 
@@ -83,11 +83,10 @@ function drawGroup(map, group, color) {
     if (!layer) {
         map.addLayer({
             'id': (group.id).toString(),
-            'type': 'line',
+            'type': fill ? 'fill' : 'line',
             'source': (group.id).toString(),
-            'paint': {
-                'line-color': color,
-            }
+            'paint': fill ? {'fill-color': color, 'fill-opacity': 0.8}
+                : {'line-color': color}
         });
     }
 }

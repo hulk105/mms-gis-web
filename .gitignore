@@ -8,6 +8,9 @@
 ### IntelliJ IDEA ###
 .idea
 
+#eslint
+.eslintcache
+
 # testing
 /coverage
 
