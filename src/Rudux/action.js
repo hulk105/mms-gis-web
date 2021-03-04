@@ -19,12 +19,21 @@ export const closeError = ({
 });
 
 export const showAddGroupPopUp = (section) => ({
-    type:types.SHOW_ADD_GROUP_POP_UP,
+    type: types.SHOW_ADD_GROUP_POP_UP,
     payload: section
 });
 
 export const closeAddGroupPopUp = ({
     type: types.CLOSE_ADD_GROUP_POP_UP
+})
+
+export const showRemoveGroupPopUp = (section, groups) => ({
+    type: types.SHOW_REMOVE_GROUP_POP_UP,
+    payload: [section, groups]
+})
+
+export const closeRemoveGroupPopUp = ({
+    type: types.CLOSE_REMOVE_GROUP_POP_UP
 })
 
 export const addTableRow = (data) => ({
@@ -80,22 +89,6 @@ export const postSave = (bool) => ({
     payload: bool
 })
 
-export const getResearchGroups = () => async (dispatch) => {
-    try {
-        fetchAndParse(dispatch, '/group?section=RESEARCH', types.PUT_FIRST_TABLE)
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export const getInfluenceGroup = () => async (dispatch) => {
-  fetchAndParse(dispatch, '/group?section=INFLUENCE', types.PUT_SECOND_TABLE);
-}
-
-export const getCitiesGroup = () => async (dispatch) => {
-  fetchAndParse(dispatch, '/group?section=CITIES', types.PUT_THIRD_TABLE);
-}
-
 export const getTables = () => async (dispatch) => {
     try {
         fetchAndParse(dispatch, '/group?section=RESEARCH', types.PUT_FIRST_TABLE);
@@ -136,7 +129,7 @@ export const addNewPoint = (pointInfo) => async (dispatch) => {
     }
 };
 
-export const deleteSelectedPoint = (id, dispatchFunction) => async (dispatch) => {
+export const deleteSelectedPoint = (id) => async (dispatch) => {
     try {
         await fetch(`/point/${id}`, {method: 'delete'});
         dispatch(getTables());
@@ -145,7 +138,7 @@ export const deleteSelectedPoint = (id, dispatchFunction) => async (dispatch) =>
     }
 };
 
-export const getAllGroups = () => async (dispatch) =>{
+export const getAllGroups = () => async (dispatch) => {
     fetchAndParse(dispatch,'/group/all', types.PUT_GROUPS);
 }
 
@@ -159,6 +152,15 @@ export const addNewGroup = (groupInfo) => async (dispatch) => {
             method: 'post',
             body: JSON.stringify(groupInfo)
         })
+        dispatch(getTables());
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const removeGroup = (id) => async (dispatch) => {
+    try {
+        await fetch(`/group/${id}`, {method: 'delete'});
         dispatch(getTables());
     } catch (error) {
         console.log(error);

@@ -8,9 +8,6 @@ import {
     clearIdFirst,
     clearIdSecond,
     clearIdThird,
-    deleteRowFirstTable,
-    deleteRowSecondTable,
-    deleteRowThirdTable,
     deleteSelectedPoint,
     getAllGroups,
     getTables,
@@ -18,7 +15,7 @@ import {
     setIdSecondTable,
     setIdThirdTable,
     showAddGroupPopUp,
-    showOpen,
+    showOpen, showRemoveGroupPopUp,
 } from './Rudux/action';
 
 import './aside.scss';
@@ -73,21 +70,55 @@ function Aside() {
         dispatch(showAddGroupPopUp(CITIES));
     }
 
+    const getGroupsBySection = (section) => {
+
+        let groups = [];
+
+        switch (section) {
+            case 'RESEARCH':
+                groups =  firstTable;
+                break;
+            case 'INFLUENCE':
+                groups = secondTable;
+                break;
+            case 'CITIES':
+                groups = thirdTable;
+                break;
+        }
+
+        return groups;
+    }
+
+    const showRemoveGroupPopUpForResearchSection = () => {
+        let groups = getGroupsBySection(RESEARCH);
+        dispatch(showRemoveGroupPopUp(RESEARCH, groups));
+    }
+
+    const showRemoveGroupPopUpForInfluenceSection = () => {
+        let groups = getGroupsBySection(INFLUENCE);
+        dispatch(showRemoveGroupPopUp(INFLUENCE, groups));
+    }
+
+    const showRemoveGroupPopUpForCitiesSection = () => {
+        let groups = getGroupsBySection(CITIES);
+        dispatch(showRemoveGroupPopUp(CITIES, groups));
+    }
+
     const deleteSelectedPointFromTheResearchTable = () => {
         if (idFirstTable) {
-            dispatch(deleteSelectedPoint(idFirstTable, deleteRowFirstTable));
+            dispatch(deleteSelectedPoint(idFirstTable));
         }
     };
 
     const deleteSelectedPointFromTheInfluenceTable = () => {
         if (idSecondTable) {
-            dispatch(deleteSelectedPoint(idSecondTable, deleteRowSecondTable));
+            dispatch(deleteSelectedPoint(idSecondTable));
         }
     };
 
     const deleteSelectedPointFromTheCitiesTable = () => {
         if (idThirdTable) {
-            dispatch(deleteSelectedPoint(idThirdTable, deleteRowThirdTable));
+            dispatch(deleteSelectedPoint(idThirdTable));
         }
     };
 
@@ -116,7 +147,7 @@ function Aside() {
                 <div className={'blockButtons'}>
                     <ButtonBlock
                         funcOne={showAddGroupPopUpForResearchSection}
-                        funcTwo={null}
+                        funcTwo={showRemoveGroupPopUpForResearchSection}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'Додати дослідження'}
                         buttonTwo={{width: 120, height: 28}} textTwo={'Видалити дослідження'}/>
@@ -138,7 +169,7 @@ function Aside() {
                 <div className={'blockButtons'}>
                     <ButtonBlock
                         funcOne={showAddGroupPopUpForInfluenceSection}
-                        funcTwo={null}
+                        funcTwo={showRemoveGroupPopUpForInfluenceSection}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'Додати катаклізм'}
                         buttonTwo={{width: 120, height: 28}} textTwo={'Видалити катаклізм'}/>
@@ -159,7 +190,7 @@ function Aside() {
                 <div className={'blockButtons'}>
                     <ButtonBlock
                         funcOne={showAddGroupPopUpForCitiesSection}
-                        funcTwo={null}
+                        funcTwo={showRemoveGroupPopUpForCitiesSection}
                         fontSize={10}
                         buttonOne={{width: 120, height: 28}} textOne={'Додати місто'}
                         buttonTwo={{width: 120, height: 28}} textTwo={'Видалити місто'}/>
