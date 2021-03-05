@@ -33,11 +33,25 @@ const Map = ({research, pollution, cities}) => {
         map.on('load', () => {
             research.map(group => drawGroup(map, group, '#3f48cc'));
             pollution.map(group => {
-                if (isDangerousPollution(group, research)) {
+                const isInResearchArea = research
+                    .some(researchArea => groupInArea(group, researchArea))
+                if (isInResearchArea) {
                     drawGroup(map, group, '#ed1c24');
                 }
             });
-            cities.map(group => drawGroup(map, group, '#3f48cc', true));
+            cities.map(group => {
+                const cityStatus = getCityStatus(group, research, pollution);
+                switch (cityStatus) {
+                    case 'SAFE':
+                        drawGroup(map, group, '#3f48cc', true);
+                        break;
+                    case 'DANGER':
+                        drawGroup(map, group, '#ed1c24', true);
+                        break;
+                    default:
+                        return;
+                }
+            });
         });
 
         return () => map.remove();
@@ -96,15 +110,24 @@ function drawGroup(map, group, color, fill = false) {
     }
 }
 
-function isDangerousPollution(pollution, research) {
-    const polygon1 = pollution.points
+function getCityStatus(group, research, pollution) {
+    const outerResearchAreas = research
+        .filter(currentResearchArea => groupInArea(group, currentResearchArea));
+    if (outerResearchAreas.length === 0) {
+        return 'OUT';
+    }
+
+    const outerPollutionAreas = pollution
+        .filter(currentPollutionArea => groupInArea(group, currentPollutionArea));
+    return (outerPollutionAreas.length === 0) ? 'SAFE' : 'DANGER';
+}
+
+function groupInArea(group, area) {
+    const polygon1 = group.points
         .map(point => [point.x, point.y]);
-    return research
-        .some(group => {
-            const polygon2 = group.points
-                .map(point => [point.x, point.y]);
-            return overlap(polygon1, polygon2);
-        });
+    const polygon2 = area.points
+        .map(point => [point.x, point.y]);
+    return overlap(polygon1, polygon2);
 }
 
 export default Map;
