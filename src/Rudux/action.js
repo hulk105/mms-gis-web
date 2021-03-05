@@ -100,17 +100,19 @@ export const getTables = () => async (dispatch) => {
 };
 
 function fetchAndParse(dispatch, url, type) {
-    fetch(url)
-        .then(async (data) => {
+    fetch(url).then(async (data) => {
             if (data.ok) {
                 const groupsJSON = await data.json();
-                const groups = groupsJSON.map(groupsJSON =>new Group(groupsJSON));
+                const groups = groupsJSON.map(groupsJSON => new Group(groupsJSON));
                 dispatch({type, payload: groups});
+            } else {
+                dispatch({type, payload: []});
             }
-        }).catch(error => {
-        console.log('Connection error', error);
-        dispatch({type, payload: []});
-    });
+        })
+        .catch(error => {
+            console.log('Connection error', error);
+            dispatch({type, payload: []});
+        });
 }
 
 export const addNewPoint = (pointInfo) => async (dispatch) => {
