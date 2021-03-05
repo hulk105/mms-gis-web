@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import mapboxgl from 'mapbox-gl';
 import './map.scss';
+import overlap from "polygon-overlap";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXNkNzI2IiwiYSI6ImNrbDZ4dW5lbTJtNm4zMG1zZjhhMmo1d28ifQ.Hy6v6YxQfGTapr-SsS4eqQ'
 
@@ -31,7 +32,11 @@ const Map = ({research, pollution, cities}) => {
 
         map.on('load', () => {
             research.map(group => drawGroup(map, group, '#3f48cc'));
-            pollution.map(group => drawGroup(map, group, '#ed1c24'));
+            pollution.map(group => {
+                if (isDangerousPollution(group, research)) {
+                    drawGroup(map, group, '#ed1c24');
+                }
+            });
             cities.map(group => drawGroup(map, group, '#3f48cc', true));
         });
 
@@ -89,6 +94,17 @@ function drawGroup(map, group, color, fill = false) {
                 : {'line-color': color}
         });
     }
+}
+
+function isDangerousPollution(pollution, research) {
+    const polygon1 = pollution.points
+        .map(point => [point.x, point.y]);
+    return research
+        .some(group => {
+            const polygon2 = group.points
+                .map(point => [point.x, point.y]);
+            return overlap(polygon1, polygon2);
+        });
 }
 
 export default Map;
