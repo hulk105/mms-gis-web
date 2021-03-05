@@ -101,7 +101,7 @@ function PointPopUp({groups, section}) {
                         <div>
                             <Button
                                 func={null}
-                                text={'додати ділянку забруднення'}
+                                text={'Додати точку'}
                                 size={{width: 262, height: 32}}
                                 fontSize={10}/>
                         </div>

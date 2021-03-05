@@ -9,12 +9,22 @@ const defaultLongitude = 32.9;
 const defaultLatitude = 49.8;
 const defaultZoom = 5;
 
-const Map = ({research, pollution, cities}) => {
+const Map = ({research, pollution, cities, showAreas}) => {
 
     const mapContainer = useRef(null);
     const [lng, setLng] = useState(defaultLongitude)
     const [lat, setLat] = useState(defaultLatitude);
     const [zoom, setZoom] = useState(defaultZoom);
+
+    const hideAreas = (map) => {
+        research.concat(pollution).concat().concat(cities)
+            .forEach(group => {
+                const layer = map.getLayer((group.id).toString());
+                if (layer) {
+                    map.removeLayer((group.id).toString());
+                }
+            })
+    }
 
     useEffect(() => {
         const map = new mapboxgl.Map({
@@ -31,15 +41,20 @@ const Map = ({research, pollution, cities}) => {
         });
 
         map.on('load', () => {
+            if (!showAreas) {
+                hideAreas(map);
+                return;
+            }
+
             research.map(group => drawGroup(map, group, '#3f48cc'));
-            pollution.map(group => {
+            pollution.forEach(group => {
                 const isInResearchArea = research
                     .some(researchArea => groupInArea(group, researchArea))
                 if (isInResearchArea) {
                     drawGroup(map, group, '#ed1c24');
                 }
             });
-            cities.map(group => {
+            cities.forEach(group => {
                 const cityStatus = getCityStatus(group, research, pollution);
                 switch (cityStatus) {
                     case 'SAFE':
@@ -55,7 +70,7 @@ const Map = ({research, pollution, cities}) => {
         });
 
         return () => map.remove();
-    }, [research, pollution, cities]);
+    }, [research, pollution, cities, showAreas]);
 
     return (
         <div className='global-map'>

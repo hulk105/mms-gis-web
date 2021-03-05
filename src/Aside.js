@@ -205,16 +205,17 @@ function Aside() {
                 <div className={'textBlock'}>
                     <div className={'firstText'}>
                         <div/>
-                        <div/>
                         <span>показує обраний кордон досліджуваної території</span>
                     </div>
                     <div className={'secondText'}>
-                        <div/>
                         <div/>
                         <span>показує кордон впливу джерел забруднення</span>
                     </div>
                     <div className={'thirdText'}>
                         <div/>
+                        <span>показує населені пункти, у яких потенційно має бути безпечно</span>
+                    </div>
+                    <div className={'fourthText'}>
                         <div/>
                         <span>показує населені пункти, які потенційно можуть потрапити в зону впливу</span>
                     </div>

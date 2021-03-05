@@ -1,15 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import ButtonBlock from './components/button/buttonBlock';
+import {useDispatch, useSelector} from 'react-redux';
 import PointPopUp from './components/popUp/pointPopUp';
 
-import empty from './assets/img/empty.jpg';
-import area from './assets/img/area.jpg';
-import cities from './assets/img/cities.jpg';
-
-
-import {clearIdFirst, clearIdSecond, clearIdThird} from './Rudux/action';
+import {changeAreas} from './Rudux/action';
 import './section.scss';
 import Map from "./map";
 import AddGroupPopUp from "./components/add-group-pop-up";
@@ -17,61 +10,43 @@ import RemoveGroupPopUp from "./components/remove-group-pop-up";
 
 function Section() {
 
-	const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const {firstTable} = useSelector(state => state.firstTableReducer);
     const {secondTable} = useSelector(state => state.secondTableReducer);
     const {thirdTable} = useSelector(state => state.thirdTableReducer);
 
-	const {groups} = useSelector(state => state.groupsReducer)
+    const {groups} = useSelector(state => state.groupsReducer);
 
-	const { showPopUp, showAddGroupPopUp,
-		showRemoveGroupPopUp, section, selectedGroups } = useSelector( state => state.showPopUpReducer );
-	const [ setMap ] = React.useState( empty );
+    //const {showAreas} = useSelector(state => state.areasReducer)
 
-	const resetAllChoose = () => {
-		dispatch( clearIdFirst );
-		dispatch( clearIdSecond );
-		dispatch( clearIdThird );
-	};
+    const [showAreas, setShowAreas] = React.useState(true);
 
-	const clearMap = () => {
-		setMap( empty );
-	};
+    const {
+        showPopUp, showAddGroupPopUp,
+        showRemoveGroupPopUp, section, selectedGroups
+    } = useSelector(state => state.showPopUpReducer);
 
-	const drawMap = () => {
-		setMap( area );
-	};
-
-	const startDraw = () => {
-		setMap( cities );
-	};
+    const changeMapAreas = () => {
+        //dispatch(changeAreas(!showAreas));
+        setShowAreas(!showAreas);
+    }
 
     return (
         <section>
             <div className={'map'}>
-                <Map research={firstTable} pollution={secondTable} cities={thirdTable}/>
+                <Map research={firstTable} pollution={secondTable} cities={thirdTable} showAreas={showAreas}/>
                 {showPopUp && <PointPopUp groups={groups} section={section}/>}
-								{showAddGroupPopUp && <AddGroupPopUp section={section}/>}
-								{showRemoveGroupPopUp && <RemoveGroupPopUp groups={selectedGroups}/>}
+                {showAddGroupPopUp && <AddGroupPopUp section={section}/>}
+                {showRemoveGroupPopUp && <RemoveGroupPopUp groups={selectedGroups}/>}
             </div>
             <div className={'underMap'}>
-                <ButtonBlock
-                    funcOne={drawMap}
-                    funcTwo={startDraw}
-                    fontSize={12}
-                    buttonOne={{width: 206, height: 32}}
-                    buttonTwo={{width: 206, height: 32}}
-                    textOne={'вкажіть територію'}
-                    textTwo={'почати відмальовку'}/>
-                <ButtonBlock
-                    funcOne={resetAllChoose}
-                    funcTwo={clearMap}
-                    fontSize={12}
-                    buttonOne={{width: 206, height: 32}}
-                    buttonTwo={{width: 66, height: 32}}
-                    textOne={'оновити'}
-                    textTwo={'зтерти'}/>
+                <label className={'showAreasCheckbox'}>
+                    <input type="checkbox" id="showAreas"
+                           checked={showAreas}
+                           onChange={changeMapAreas}/>
+                    Відображати області на мапі
+                </label>
             </div>
 
         </section>

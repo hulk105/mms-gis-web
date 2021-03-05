@@ -25,7 +25,12 @@ export const showAddGroupPopUp = (section) => ({
 
 export const closeAddGroupPopUp = ({
     type: types.CLOSE_ADD_GROUP_POP_UP
-})
+});
+
+export const changeAreas = (showAreas) => ({
+    type: types.CHANGE_AREAS,
+    payload: showAreas
+});
 
 export const showRemoveGroupPopUp = (section, groups) => ({
     type: types.SHOW_REMOVE_GROUP_POP_UP,
