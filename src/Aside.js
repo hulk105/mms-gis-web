@@ -137,6 +137,7 @@ function Aside() {
     return (
         <aside>
             <div className={'wrapperFirst'}>
+                <span> Області дослідження</span>
                 <div className={'firstTable'}>
                     <Table
                         mock={firstTable}
@@ -148,15 +149,15 @@ function Aside() {
                     <ButtonBlock
                         funcOne={showAddGroupPopUpForResearchSection}
                         funcTwo={showRemoveGroupPopUpForResearchSection}
-                        fontSize={10}
-                        buttonOne={{width: 120, height: 28}} textOne={'Додати дослідження'}
-                        buttonTwo={{width: 120, height: 28}} textTwo={'Видалити дослідження'}/>
+                        fontSize={9}
+                        buttonOne={{width: 134, height: 30}} textOne={'Додати дослідження'}
+                        buttonTwo={{width: 134, height: 30}} textTwo={'Видалити дослідження'}/>
                     <ButtonBlock
                         funcOne={showAddPointPopUpForResearchSection}
                         funcTwo={deleteSelectedPointFromTheResearchTable}
-                        fontSize={10}
-                        buttonOne={{width: 140, height: 28}} textOne={'Додати точку'}
-                        buttonTwo={{width: 125, height: 28}} textTwo={'Видалити точку'}/>
+                        fontSize={9}
+                        buttonOne={{width: 134, height: 30}} textOne={'Додати точку'}
+                        buttonTwo={{width: 134, height: 30}} textTwo={'Видалити точку'}/>
                 </div>
             </div>
 
@@ -170,15 +171,15 @@ function Aside() {
                     <ButtonBlock
                         funcOne={showAddGroupPopUpForInfluenceSection}
                         funcTwo={showRemoveGroupPopUpForInfluenceSection}
-                        fontSize={10}
-                        buttonOne={{width: 120, height: 28}} textOne={'Додати катаклізм'}
-                        buttonTwo={{width: 120, height: 28}} textTwo={'Видалити катаклізм'}/>
+                        fontSize={9}
+                        buttonOne={{width: 134, height: 30}} textOne={'Додати катаклізм'}
+                        buttonTwo={{width: 134, height: 30}} textTwo={'Видалити катаклізм'}/>
                     <ButtonBlock
                         funcOne={showAddPointPopUpForInfluenceSection}
                         funcTwo={deleteSelectedPointFromTheInfluenceTable}
-                        fontSize={10}
-                        buttonOne={{width: 140, height: 28}} textOne={'Додати точку'}
-                        buttonTwo={{width: 125, height: 28}} textTwo={'Видалити точку'}/>
+                        fontSize={9}
+                        buttonOne={{width: 134, height: 30}} textOne={'Додати точку'}
+                        buttonTwo={{width: 134, height: 30}} textTwo={'Видалити точку'}/>
                 </div>
             </div>
             <div className={'wrapperThird'}>
@@ -191,34 +192,33 @@ function Aside() {
                     <ButtonBlock
                         funcOne={showAddGroupPopUpForCitiesSection}
                         funcTwo={showRemoveGroupPopUpForCitiesSection}
-                        fontSize={10}
-                        buttonOne={{width: 120, height: 28}} textOne={'Додати місто'}
-                        buttonTwo={{width: 120, height: 28}} textTwo={'Видалити місто'}/>
+                        fontSize={9}
+                        buttonOne={{width: 134, height: 30}} textOne={'Додати місто'}
+                        buttonTwo={{width: 134, height: 30}} textTwo={'Видалити місто'}/>
                     <ButtonBlock
                         funcOne={showAddPointPopUpForCitiesSection}
                         funcTwo={deleteSelectedPointFromTheCitiesTable}
-                        fontSize={10}
-                        buttonOne={{width: 140, height: 28}} textOne={'Додати точку'}
-                        buttonTwo={{width: 125, height: 28}} textTwo={'Видалити точку'}/>
+                        fontSize={9}
+                        buttonOne={{width: 134, height: 30}} textOne={'Додати точку'}
+                        buttonTwo={{width: 134, height: 30}} textTwo={'Видалити точку'}/>
                 </div>
-
-                <div className={'textBlock'}>
-                    <div className={'firstText'}>
-                        <div/>
-                        <span>показує обраний кордон досліджуваної території</span>
-                    </div>
-                    <div className={'secondText'}>
-                        <div/>
-                        <span>показує кордон впливу джерел забруднення</span>
-                    </div>
-                    <div className={'thirdText'}>
-                        <div/>
-                        <span>показує населені пункти, у яких потенційно має бути безпечно</span>
-                    </div>
-                    <div className={'fourthText'}>
-                        <div/>
-                        <span>показує населені пункти, які потенційно можуть потрапити в зону впливу</span>
-                    </div>
+            </div>
+            <div className={'textBlock'}>
+                <div className={'firstText'}>
+                    <div/>
+                    <span>показує обраний кордон досліджуваної території</span>
+                </div>
+                <div className={'secondText'}>
+                    <div/>
+                    <span>показує кордон впливу джерел забруднення</span>
+                </div>
+                <div className={'thirdText'}>
+                    <div/>
+                    <span>показує населені пункти, у яких потенційно має бути безпечно</span>
+                </div>
+                <div className={'fourthText'}>
+                    <div/>
+                    <span>показує населені пункти, які потенційно можуть потрапити в зону впливу</span>
                 </div>
             </div>
         </aside>

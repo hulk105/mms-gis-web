@@ -1,38 +1,30 @@
 aside {
   min-width: 557px;
-  margin-right: 8px;
+  margin-right: 5px;
 
   .firstTable, .secondTable, .thirdTable {
     overflow-y: auto;
     overflow-x: hidden;
+    background-color: #f5f5f5;
+    margin-bottom: 5px;
+    height: 160px;
   }
 
   .wrapperFirst {
-    margin-bottom: 30px;
-
-    .firstTable {
-      height: 186px;
-
-    }
+    margin-bottom: 10px;
 
     .blockButtons {
-      margin-top: 8px;
       display: flex;
       justify-content: space-between;
     }
   }
 
   .wrapperSecond {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     span {
       font-size: 18px;
       color: #000000;
-    }
-
-    .secondTable {
-      height: 121px;
-
     }
   }
 
@@ -41,88 +33,83 @@ aside {
       font-size: 18px;
       color: #000000;
     }
+  }
 
-    .thirdTable {
-      height: 151px;
+  .textBlock {
+    margin-top: 3px;
+    margin-bottom: 15px;
 
+    .firstText {
+      div:nth-child(1) {
+        display: inline-block;
+        margin-left: 10px;
+        width: 30px;
+        height: 2px;
+        vertical-align: middle;
+        background-color: #3f48cc;
+      }
+
+      span {
+        margin-left: 10px;
+        line-height: 12px;
+        font-size: 12px;
+        color: #3f3f3f;
+      }
     }
 
-    .textBlock {
-      margin-top: 3px;
-      margin-bottom: 15px;
-
-      .firstText {
-        div:nth-child(1) {
-          display: inline-block;
-          margin-left: 10px;
-          width: 30px;
-          height: 2px;
-          vertical-align: middle;
-          background-color: #3f48cc;
-        }
-
-        span {
-          margin-left: 10px;
-          line-height: 12px;
-          font-size: 12px;
-          color: #3f3f3f;
-        }
+    .secondText {
+      div:nth-child(1) {
+        display: inline-block;
+        margin-left: 10px;
+        width: 30px;
+        height: 2px;
+        vertical-align: middle;
+        background-color: #ed1c24;
       }
 
-      .secondText {
-        div:nth-child(1) {
-          display: inline-block;
-          margin-left: 10px;
-          width: 30px;
-          height: 2px;
-          vertical-align: middle;
-          background-color: #ed1c24;
-        }
+      span {
+        margin-left: 10px;
+        line-height: 12px;
+        font-size: 12px;
+        color: #3f3f3f;
+      }
+    }
 
-        span {
-          margin-left: 10px;
-          line-height: 12px;
-          font-size: 12px;
-          color: #3f3f3f;
-        }
+    .thirdText {
+      div:nth-child(1) {
+        display: inline-block;
+        margin-left: 20px;
+        width: 10px;
+        height: 10px;
+        border: 2px solid #3f48cc;
+        vertical-align: middle;
+        background-color: rgba(63, 72, 204, 0.8);
       }
 
-      .thirdText {
-        div:nth-child(1) {
-          display: inline-block;
-          margin-left: 20px;
-          width: 10px;
-          height: 10px;
-          border: 2px solid #3f48cc;
-          vertical-align: middle;
-          background-color: rgba(63, 72, 204, 0.8);
-        }
+      span {
+        margin-left: 10px;
+        line-height: 12px;
+        font-size: 12px;
+        color: #3f3f3f;
+      }
+    }
 
-        span {
-          margin-left: 10px;
-          line-height: 12px;
-          font-size: 12px;
-          color: #3f3f3f;
-        }
+    .fourthText {
+      div:nth-child(1) {
+        display: inline-block;
+        margin-left: 20px;
+        width: 10px;
+        height: 10px;
+        border: 2px solid #ed1c24;
+        vertical-align: middle;
+        background-color: rgba(237, 28, 36, 0.8);
       }
 
-      .fourthText {
-        div:nth-child(1) {
-          display: inline-block;
-          margin-left: 20px;
-          width: 10px;
-          height: 10px;
-          border: 2px solid #ed1c24;
-          vertical-align: middle;
-          background-color: rgba(237, 28, 36, 0.8);
-        }
-
-        span {
-          margin-left: 10px;
-          line-height: 12px;
-          font-size: 12px;
-          color: #3f3f3f;
-        }
+      span {
+        margin-left: 10px;
+        line-height: 12px;
+        font-size: 12px;
+        color: #3f3f3f;
       }
     }
   }

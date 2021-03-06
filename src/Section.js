@@ -43,7 +43,7 @@ function Section() {
                 {showRemoveGroupPopUp && <RemoveGroupPopUp groups={selectedGroups}/>}
             </div>
             <div className={'underMap'}>
-                <Button text={'Видалити всі дані'} size={{width: 120, height: 28}} fontSize={10} func={removeAllGroupsHandler}/>
+                <Button text={'Видалити всі дані'} size={{width: 134, height: 30}} fontSize={10} func={removeAllGroupsHandler}/>
                 <label className={'showAreasCheckbox'}>
                     <input type="checkbox" id="showAreas"
                            checked={showAreas}
