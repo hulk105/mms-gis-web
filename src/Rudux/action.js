@@ -173,3 +173,14 @@ export const removeGroup = (id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const removeAllGroups = (groups) => async (dispatch) => {
+    try {
+        for(let i = 0; i < groups.length; i++){
+            await fetch(`/group/${groups[i].id}`, {method: 'delete'});
+        }
+        dispatch(getTables());
+    }catch (error){
+        console.log(error);
+    }
+}

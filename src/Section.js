@@ -2,11 +2,12 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import PointPopUp from './components/popUp/pointPopUp';
 
-import {changeAreas} from './Rudux/action';
+import {removeAllGroups} from './Rudux/action';
 import './section.scss';
 import Map from "./map";
 import AddGroupPopUp from "./components/add-group-pop-up";
 import RemoveGroupPopUp from "./components/remove-group-pop-up";
+import Button from "./components/button/button";
 
 function Section() {
 
@@ -18,8 +19,6 @@ function Section() {
 
     const {groups} = useSelector(state => state.groupsReducer);
 
-    //const {showAreas} = useSelector(state => state.areasReducer)
-
     const [showAreas, setShowAreas] = React.useState(true);
 
     const {
@@ -28,8 +27,11 @@ function Section() {
     } = useSelector(state => state.showPopUpReducer);
 
     const changeMapAreas = () => {
-        //dispatch(changeAreas(!showAreas));
         setShowAreas(!showAreas);
+    }
+
+    const removeAllGroupsHandler = () => {
+        dispatch(removeAllGroups(groups));
     }
 
     return (
@@ -41,6 +43,7 @@ function Section() {
                 {showRemoveGroupPopUp && <RemoveGroupPopUp groups={selectedGroups}/>}
             </div>
             <div className={'underMap'}>
+                <Button text={'Видалити всі дані'} size={{width: 120, height: 28}} fontSize={10} func={removeAllGroupsHandler}/>
                 <label className={'showAreasCheckbox'}>
                     <input type="checkbox" id="showAreas"
                            checked={showAreas}
@@ -48,7 +51,6 @@ function Section() {
                     Відображати області на мапі
                 </label>
             </div>
-
         </section>
     );
 }

@@ -7356,6 +7356,11 @@
   "resolved" "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.1.6.tgz"
   "version" "1.1.6"
 
+"lines-intersect@1.0.0":
+  "integrity" "sha1-pgyHo9lXoIcdEU0FSmhatx9ygEI="
+  "resolved" "https://registry.npmjs.org/lines-intersect/-/lines-intersect-1.0.0.tgz"
+  "version" "1.0.0"
+
 "load-json-file@^1.0.0":
   "integrity" "sha1-lWkFcI1YtLq0wiYbBPWfMcmTdMA="
   "resolved" "https://registry.npmjs.org/load-json-file/-/load-json-file-1.1.0.tgz"
@@ -7602,7 +7607,7 @@
   dependencies:
     "object-visit" "^1.0.0"
 
-"mapbox-gl@^2.1.1", "mapbox-gl@>=0.27.0":
+"mapbox-gl@^2.1.1":
   "integrity" "sha512-LUbXcjygNHbjahkhsB1I/KdZ8uoproe1u1ImrVJe88dyXYKJKOZoSBe23tm+ldu76l3G9XbgPOdUhkhqL172FQ=="
   "resolved" "https://registry.npmjs.org/mapbox-gl/-/mapbox-gl-2.1.1.tgz"
   "version" "2.1.1"
@@ -8769,6 +8774,19 @@
   "version" "1.6.4"
   dependencies:
     "ts-pnp" "^1.1.6"
+
+"point-inside-polygon@1.0.1":
+  "integrity" "sha1-9PbekBv4+c0vfZtftHWPGvqYEqs="
+  "resolved" "https://registry.npmjs.org/point-inside-polygon/-/point-inside-polygon-1.0.1.tgz"
+  "version" "1.0.1"
+
+"polygon-overlap@1.0.5":
+  "integrity" "sha1-DONSaovZhnSrBG/JLdAmZLbYJC0="
+  "resolved" "https://registry.npmjs.org/polygon-overlap/-/polygon-overlap-1.0.5.tgz"
+  "version" "1.0.5"
+  dependencies:
+    "lines-intersect" "1.0.0"
+    "point-inside-polygon" "1.0.1"
 
 "portfinder@^1.0.26":
   "integrity" "sha512-Se+2isanIcEqf2XMHjyUKskczxbPH7dQnlMjXX6+dybayyHvAf/TCgyMRlzf/B6QDhAEFOGes0pzRo3by4AbMA=="
